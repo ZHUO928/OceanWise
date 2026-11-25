@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智渔蔚蓝 OceanWise · 智慧海洋牧场数字平台</title>
+  <meta name="description" content="潍坊学院第十五届大学生网络文化节『数智新技艺』参赛作品——海洋渔业科学与技术专业 × 智慧海洋牧场">
+  <style>
+/* ===================== 智渔蔚蓝 · 全局样式 ===================== */
+:root {
+  --blue-deep: #0b4f7c;
+  --blue-main: #1273b3;
+  --blue-light: #3ea6dd;
+  --blue-pale: #e8f4fb;
+  --bg: #f4f9fd;
+  --bg-alt: #eaf4fa;
+  --text: #1c3244;
+  --text-soft: #4d6b82;
+  --accent: #f2a33c;
+  --radius: 16px;
+  --shadow: 0 8px 28px rgba(11, 79, 124, 0.10);
+  --font: "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.75;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ===================== 导航栏 ===================== */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(18, 115, 179, 0.12);
+  transition: box-shadow 0.3s;
+}
+.navbar.scrolled { box-shadow: 0 4px 18px rgba(11, 79, 124, 0.12); }
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--blue-deep);
+  letter-spacing: 1px;
+}
+.logo-wave { margin-right: 4px; }
+
+.nav-links { display: flex; gap: 28px; }
+
+.nav-link {
+  font-size: 15px;
+  color: var(--text-soft);
+  padding: 4px 2px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.25s, border-color 0.25s;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--blue-main);
+  border-bottom-color: var(--blue-main);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: var(--blue-deep);
+  cursor: pointer;
+}
+
+/* ===================== 首页 Hero ===================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(160deg, #0b4f7c 0%, #1273b3 45%, #3ea6dd 100%);
+  color: #fff;
+  overflow: hidden;
+  padding: 100px 24px 140px;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 860px; }
+
+.hero-badge {
+  display: inline-block;
+  padding: 6px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  font-size: 14px;
+  letter-spacing: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  margin-bottom: 28px;
+}
+
+.hero-title {
+  font-size: clamp(48px, 8vw, 84px);
+  font-weight: 800;
+  letter-spacing: 10px;
+  text-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
+}
+
+.hero-en {
+  margin-top: 10px;
+  font-size: clamp(15px, 2.2vw, 20px);
+  font-weight: 600;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: #ffe1ae;
+  opacity: 0.95;
+}
+
+.hero-subtitle {
+  font-size: clamp(18px, 3vw, 26px);
+  letter-spacing: 6px;
+  margin-top: 8px;
+  opacity: 0.95;
+}
+
+.hero-slogan {
+  margin-top: 26px;
+  font-size: clamp(16px, 2.4vw, 21px);
+  font-weight: 600;
+  color: #ffe1ae;
+  letter-spacing: 3px;
+}
+
+.hero-desc {
+  margin-top: 18px;
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.hero-actions {
+  margin-top: 36px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary {
+  background: var(--accent);
+  color: #4a2d00;
+  box-shadow: 0 6px 18px rgba(242, 163, 60, 0.4);
+}
+.btn-primary:hover { box-shadow: 0 10px 24px rgba(242, 163, 60, 0.5); }
+
+.btn-ghost {
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+}
+.btn-ghost:hover { background: rgba(255, 255, 255, 0.14); }
+
+.hero-meta {
+  margin-top: 42px;
+  font-size: 14px;
+  opacity: 0.85;
+  letter-spacing: 1px;
+}
+.hero-meta .dot { margin: 0 10px; }
+
+.hero-wave {
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  z-index: 1;
+}
+.hero-wave svg { display: block; width: 100%; height: 100px; }
+
+/* 气泡动画 */
+.hero-bubbles span {
+  position: absolute;
+  bottom: -60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  animation: rise 11s infinite ease-in;
+}
+.hero-bubbles span:nth-child(1) { left: 12%; width: 34px; height: 34px; animation-delay: 0s; }
+.hero-bubbles span:nth-child(2) { left: 30%; width: 18px; height: 18px; animation-delay: 2.5s; }
+.hero-bubbles span:nth-child(3) { left: 55%; width: 46px; height: 46px; animation-delay: 5s; }
+.hero-bubbles span:nth-child(4) { left: 72%; width: 24px; height: 24px; animation-delay: 1.5s; }
+.hero-bubbles span:nth-child(5) { left: 88%; width: 38px; height: 38px; animation-delay: 7s; }
+
+@keyframes rise {
+  0%   { transform: translateY(0) scale(1); opacity: 0; }
+  15%  { opacity: 0.7; }
+  100% { transform: translateY(-105vh) scale(1.25); opacity: 0; }
+}
+
+/* ===================== 通用板块 ===================== */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 96px 24px;
+}
+
+.section-alt {
+  max-width: none;
+  background: var(--bg-alt);
+}
+.section-alt > * { max-width: 1200px; margin-left: auto; margin-right: auto; }
+
+.section-head { text-align: center; margin-bottom: 56px; }
+
+.section-tag {
+  display: inline-block;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: var(--blue-main);
+  background: #d9edfa;
+  padding: 4px 16px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.section-head h2 {
+  font-size: clamp(26px, 4vw, 36px);
+  color: var(--blue-deep);
+  letter-spacing: 1px;
+}
+
+.section-head p {
+  margin-top: 14px;
+  color: var(--text-soft);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 滚动渐入 */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================== 数说渔业 ===================== */
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.chart-card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px 20px 12px;
+  border: 1px solid rgba(18, 115, 179, 0.08);
+}
+
+.chart-card h3 {
+  font-size: 17px;
+  color: var(--blue-deep);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.chart { width: 100%; height: 320px; }
+
+.chart-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-soft);
+  font-size: 14px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.data-note {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+/* 海洋牧场定义卡片 */
+.ranch-def {
+  position: relative;
+  max-width: 780px;
+  margin: -16px auto 48px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  border-left: 5px solid var(--accent);
+  padding: 24px 32px 22px;
+}
+
+.ranch-def-mark {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.ranch-def p {
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--text);
+}
+
+.ranch-def strong { color: var(--blue-main); }
+
+/* ===================== 海洋牧场卡片 ===================== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.info-card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px 30px;
+  border-top: 4px solid var(--blue-light);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(11, 79, 124, 0.16);
+}
+
+.card-icon { font-size: 34px; margin-bottom: 12px; }
+
+.info-card h3 {
+  font-size: 19px;
+  color: var(--blue-deep);
+  margin-bottom: 10px;
+}
+
+.info-card p, .info-card li { font-size: 15px; color: var(--text-soft); }
+.info-card li { margin-bottom: 6px; }
+.info-card strong { color: var(--blue-main); }
+
+/* ===================== 智慧技术 ===================== */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+.tech-item {
+  position: relative;
+  background: linear-gradient(150deg, #ffffff 0%, #eef7fc 100%);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 30px 26px 24px;
+  border: 1px solid rgba(18, 115, 179, 0.1);
+  transition: transform 0.25s;
+}
+.tech-item:hover { transform: translateY(-6px); }
+
+.tech-num {
+  font-size: 30px;
+  font-weight: 800;
+  color: rgba(18, 115, 179, 0.18);
+  letter-spacing: 2px;
+}
+
+.tech-item h3 {
+  font-size: 18px;
+  color: var(--blue-deep);
+  margin: 6px 0 10px;
+}
+
+.tech-item p { font-size: 14px; color: var(--text-soft); }
+
+.tech-course {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--blue-main);
+  background: #d9edfa;
+  border-radius: 6px;
+  padding: 3px 10px;
+}
+
+/* ===================== 可持续渔业 时间轴 ===================== */
+.timeline {
+  position: relative;
+  max-width: 860px;
+  margin: 0 auto;
+  padding-left: 40px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 10px; top: 6px; bottom: 6px;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(var(--blue-light), var(--blue-deep));
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 34px;
+}
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -37px; top: 8px;
+  width: 15px; height: 15px;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid var(--blue-main);
+  box-shadow: 0 0 0 4px rgba(18, 115, 179, 0.12);
+}
+
+.timeline-year {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--blue-main);
+  letter-spacing: 1px;
+}
+
+.timeline-body h3 { font-size: 17px; color: var(--blue-deep); margin: 4px 0 6px; }
+.timeline-body p { font-size: 15px; color: var(--text-soft); }
+
+.msy-box {
+  max-width: 860px;
+  margin: 44px auto 0;
+  background: #fff;
+  border-left: 5px solid var(--accent);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 26px 30px;
+}
+.msy-box h3 { color: var(--blue-deep); margin-bottom: 8px; }
+.msy-box p { font-size: 15px; color: var(--text-soft); }
+.msy-box strong { color: var(--blue-main); }
+
+/* ===================== 互动体验 ===================== */
+.interact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.chat-card, .profile-card {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(18, 115, 179, 0.08);
+  padding: 22px;
+}
+
+.chat-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e3eef5;
+}
+.chat-avatar {
+  font-size: 30px;
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--blue-pale);
+  border-radius: 50%;
+}
+.chat-head h3 { font-size: 17px; color: var(--blue-deep); }
+.chat-status { font-size: 12px; color: var(--text-soft); }
+.status-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #34c38f;
+  margin-right: 5px;
+}
+
+.chat-window {
+  height: 300px;
+  overflow-y: auto;
+  padding: 16px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.65;
+  word-break: break-word;
+  animation: msgIn 0.25s ease;
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.msg-bot {
+  align-self: flex-start;
+  background: var(--blue-pale);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+}
+.msg-bot em { font-style: normal; color: var(--blue-main); }
+
+.msg-user {
+  align-self: flex-end;
+  background: var(--blue-main);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 0;
+}
+.chip {
+  font-size: 12px;
+  color: var(--blue-main);
+  background: #eaf4fa;
+  border: 1px solid #c6e2f2;
+  border-radius: 999px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.chip:hover { background: #d8ecfa; }
+
+.chat-input { display: flex; gap: 10px; }
+.chat-input input {
+  flex: 1;
+  border: 1.5px solid #c6dcea;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.chat-input input:focus { border-color: var(--blue-main); }
+.chat-input .btn { padding: 10px 24px; font-size: 14px; }
+
+/* 剖面图 */
+.profile-card h3 {
+  font-size: 17px;
+  color: var(--blue-deep);
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.profile-wrap { display: flex; flex-direction: column; gap: 14px; }
+
+#ranchSvg {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #d6e8f3;
+  display: block;
+}
+
+.svg-label { font-size: 15px; fill: #5a7691; font-weight: 600; }
+.svg-fish { font-size: 22px; }
+
+.zone { cursor: pointer; }
+.zone-box {
+  fill: rgba(255, 255, 255, 0.5);
+  stroke: rgba(11, 79, 124, 0.45);
+  stroke-width: 1.5;
+  transition: fill 0.2s;
+}
+.zone:hover .zone-box, .zone.selected .zone-box {
+  fill: rgba(242, 163, 60, 0.55);
+  stroke: var(--accent);
+}
+.zone-text {
+  font-size: 15px;
+  fill: #0b3a5c;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.profile-info {
+  background: var(--blue-pale);
+  border-radius: 12px;
+  padding: 16px 20px;
+  min-height: 110px;
+}
+.profile-info h4 { color: var(--blue-deep); font-size: 16px; margin-bottom: 6px; }
+.profile-info p { font-size: 14px; color: var(--text-soft); }
+.profile-info .param-tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+.profile-info .param-tags span {
+  font-size: 12px;
+  background: #fff;
+  color: var(--blue-main);
+  border-radius: 6px;
+  padding: 2px 10px;
+  border: 1px solid #c6e2f2;
+}
+
+/* ===================== 青春使命 ===================== */
+.section-dark {
+  max-width: none;
+  background: linear-gradient(150deg, #0b4f7c 0%, #0e639c 100%);
+  color: #fff;
+}
+.section-dark > * { max-width: 860px; margin-left: auto; margin-right: auto; }
+.section-dark .section-head h2 { color: #fff; }
+.section-dark .section-tag { background: rgba(255,255,255,0.15); color: #ffe1ae; }
+
+.mission-body p {
+  font-size: 17px;
+  line-height: 2;
+  margin-bottom: 18px;
+  opacity: 0.95;
+}
+.mission-body strong { color: #ffd489; }
+
+.mission-bless {
+  margin-top: 30px;
+  font-weight: 600;
+  color: #ffe1ae;
+  text-align: center;
+  font-size: 18px !important;
+}
+
+/* ===================== 页脚 ===================== */
+.footer {
+  background: #082f4c;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  padding: 44px 24px 32px;
+  font-size: 14px;
+  line-height: 2.1;
+}
+.footer-title { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 2px; }
+.footer-note { font-size: 12px; opacity: 0.7; margin-top: 10px; }
+.footer-copy { margin-top: 14px; font-size: 12px; opacity: 0.55; }
+
+/* ===================== 响应式 ===================== */
+@media (max-width: 960px) {
+  .tech-grid { grid-template-columns: repeat(2, 1fr); }
+  .interact-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .nav-links {
+    position: absolute;
+    top: 60px; left: 0; right: 0;
+    flex-direction: column;
+    background: #fff;
+    padding: 12px 24px 20px;
+    gap: 14px;
+    border-bottom: 1px solid #e3eef5;
+    display: none;
+  }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: block; }
+
+  .chart-grid, .card-grid, .tech-grid { grid-template-columns: 1fr; }
+  .section { padding: 64px 18px; }
+  .hero-title { letter-spacing: 6px; }
+  .timeline { padding-left: 32px; }
+  .timeline-item::before { left: -29px; }
+}
+
+</style>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+</head>
+<body>
+
+  <!-- ===================== 导航栏 ===================== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#hero">
+        <span class="logo-wave">🌊</span> 智渔蔚蓝
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#data" class="nav-link">数说渔业</a></li>
+        <li><a href="#ranch" class="nav-link">海洋牧场</a></li>
+        <li><a href="#tech" class="nav-link">智慧技术</a></li>
+        <li><a href="#sustain" class="nav-link">可持续渔业</a></li>
+        <li><a href="#interactive" class="nav-link">互动体验</a></li>
+        <li><a href="#mission" class="nav-link">青春使命</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="展开菜单">☰</button>
+    </div>
+  </nav>
+
+  <!-- ===================== 1. 首页 Hero ===================== -->
+  <header class="hero" id="hero">
+    <div class="hero-bubbles" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">献礼潍坊学院办学 75 周年 · 1951—2026</div>
+      <h1 class="hero-title">智渔蔚蓝</h1>
+      <p class="hero-en">OceanWise</p>
+      <p class="hero-subtitle">智慧海洋牧场数字平台</p>
+      <p class="hero-slogan">智汇青春力量 · 网筑强国基石</p>
+      <p class="hero-desc">
+        以海洋渔业科学与技术为根基，用数据与代码讲述中国海洋牧场故事，<br>
+        让青春网力奔赴深蓝，助力网络强国与数字中国建设。
+      </p>
+      <div class="hero-actions">
+        <a href="#data" class="btn btn-primary">进入平台 ↓</a>
+        <a href="#interactive" class="btn btn-ghost">体验 AI 助手</a>
+      </div>
+      <div class="hero-meta">
+        <span>参赛类别：自主研发应用</span>
+        <span class="dot">·</span>
+        <span>作者：李泽宇</span>
+        <span class="dot">·</span>
+        <span>指导教师：孙海燕</span>
+      </div>
+    </div>
+    <div class="hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path d="M0,64 C240,110 480,20 720,54 C960,88 1200,110 1440,64 L1440,120 L0,120 Z" fill="#f4f9fd"></path>
+      </svg>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== 2. 数说渔业 ===================== -->
+    <section class="section" id="data">
+      <div class="section-head reveal">
+        <span class="section-tag">DATA · 数据可视化</span>
+        <h2>数说渔业：用数据看见深蓝</h2>
+        <p>从海洋牧场建设到养捕结构优化，一组组数据背后，是数字中国战略在蓝色国土上的生动实践。</p>
+      </div>
+      <div class="chart-grid">
+        <div class="chart-card reveal">
+          <h3>国家级海洋牧场示范区数量增长</h3>
+          <div class="chart" id="chartRanch"></div>
+        </div>
+        <div class="chart-card reveal">
+          <h3>海洋渔业经济总产值变化</h3>
+          <div class="chart" id="chartEconomy"></div>
+        </div>
+        <div class="chart-card reveal">
+          <h3>海水产品养捕结构对比</h3>
+          <div class="chart" id="chartStructure"></div>
+        </div>
+        <div class="chart-card reveal">
+          <h3>近年增殖放流水生生物苗种数量</h3>
+          <div class="chart" id="chartRelease"></div>
+        </div>
+      </div>
+      <p class="data-note reveal">注：以上均为示例数据，依据公开统计口径整理，仅用于作品功能演示。</p>
+    </section>
+
+    <!-- ===================== 3. 海洋牧场专业课 ===================== -->
+    <section class="section section-alt" id="ranch">
+      <div class="section-head reveal">
+        <span class="section-tag">MARINE RANCHING · 专业课堂</span>
+        <h2>海洋牧场：在海底建"良田"</h2>
+      </div>
+      <div class="ranch-def reveal">
+        <span class="ranch-def-mark">什么是海洋牧场</span>
+        <p>基于<strong>海洋生态系统原理</strong>，在特定海域通过<strong>人工鱼礁、增殖放流</strong>等措施，构建的<strong>可持续渔业生产系统</strong>。</p>
+      </div>
+      <div class="card-grid">
+        <article class="info-card reveal">
+          <div class="card-icon">🏝️</div>
+          <h3>海洋牧场的三种类型</h3>
+          <ul>
+            <li><strong>增殖型</strong>：以增殖放流和底播养殖为主，提升渔业资源量；</li>
+            <li><strong>养护型</strong>：以资源修复与生态保护为核心，兼顾适度利用；</li>
+            <li><strong>休闲型</strong>：融合海钓、观光、科普，延伸渔业产业链。</li>
+          </ul>
+        </article>
+        <article class="info-card reveal">
+          <div class="card-icon">🪨</div>
+          <h3>人工鱼礁</h3>
+          <p>在海底投放混凝土礁、船礁、石礁等构造物，形成涡流与阴影区，为鱼类、贝类、藻类提供栖息、繁殖和索饵场所，是海洋牧场生态功能的核心载体。</p>
+        </article>
+        <article class="info-card reveal">
+          <div class="card-icon">🐟</div>
+          <h3>IMTA 多营养层次综合养殖</h3>
+          <p>上层养海带、裙带菜等藻类吸收氮磷，中层吊养扇贝、牡蛎滤食浮游生物，下层底播海参、鲍鱼利用有机碎屑——立体布局、物质循环，实现"一水多养、生态共赢"。</p>
+        </article>
+        <article class="info-card reveal">
+          <div class="card-icon">🚢</div>
+          <h3>深远海养殖装备</h3>
+          <p>以"深蓝粮仓"为代表的大型养殖工船与桁架式深水网箱，将养殖空间拓展至深远海，配备自动投饵、网衣清洗、死鱼收集系统，是设施渔业与装备制造的结合。</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================== 4. 智慧渔业技术栈 ===================== -->
+    <section class="section" id="tech">
+      <div class="section-head reveal">
+        <span class="section-tag">SMART TECH · 数智新技艺</span>
+        <h2>智慧渔业技术栈：给大海装上"感官"</h2>
+        <p>当物联网、人工智能与海洋渔业相遇，传统渔业正在经历一场数字化变革。</p>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-item reveal">
+          <div class="tech-num">01</div>
+          <h3>水下物联网监测</h3>
+          <p>溶解氧、温度、盐度、叶绿素、浊度多参数传感器阵列，实时回传水质数据，缺氧、赤潮提前预警。</p>
+          <span class="tech-course">对应课程：渔业海洋学 / 养殖水环境化学</span>
+        </div>
+        <div class="tech-item reveal">
+          <div class="tech-num">02</div>
+          <h3>水下机器人 ROV 巡检</h3>
+          <p>搭载高清摄像与声呐的 ROV 代替潜水员，完成网箱巡检、生物量估算、死鱼定位，大幅降低作业风险。</p>
+          <span class="tech-course">对应课程：渔业装备与工程</span>
+        </div>
+        <div class="tech-item reveal">
+          <div class="tech-num">03</div>
+          <h3>渔业资源声学评估</h3>
+          <p>科学鱼探仪发射声波并接收鱼群回波，依据目标强度反演资源密度与分布，是资源调查的核心手段。</p>
+          <span class="tech-course">对应课程：渔业资源评估 / 水声学</span>
+        </div>
+        <div class="tech-item reveal">
+          <div class="tech-num">04</div>
+          <h3>卫星遥感 + AI 渔情预报</h3>
+          <p>融合海表温度、叶绿素浓度、海面高度等遥感数据，用机器学习模型预测中心渔场，指导精准捕捞。</p>
+          <span class="tech-course">对应课程：渔场学 / 海洋遥感</span>
+        </div>
+        <div class="tech-item reveal">
+          <div class="tech-num">05</div>
+          <h3>5G + 北斗渔船监管</h3>
+          <p>渔船北斗定位终端实时上报船位航迹，电子围栏自动识别越界与伏休违规出海，让监管"看得见、管得住"。</p>
+          <span class="tech-course">对应课程：渔业法规与渔政管理</span>
+        </div>
+        <div class="tech-item reveal">
+          <div class="tech-num">06</div>
+          <h3>AI 图像识别与精准投喂</h3>
+          <p>水下摄像头 + 深度学习识别摄食行为，按食欲实时调节投饵量，饲料系数下降，尾水污染减轻。</p>
+          <span class="tech-course">对应课程：水产养殖学 / 饲料与营养</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 5. 可持续渔业 ===================== -->
+    <section class="section section-alt" id="sustain">
+      <div class="section-head reveal">
+        <span class="section-tag">SUSTAINABILITY · 生态优先</span>
+        <h2>可持续渔业：给海洋留白，向未来蓄力</h2>
+        <p>养护与利用并重，是中国海洋渔业高质量发展的底色。</p>
+      </div>
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="timeline-year">1995</div>
+          <div class="timeline-body">
+            <h3>伏季休渔制度全面实施</h3>
+            <p>每年春夏鱼类产卵育幼关键期，渤海、黄海、东海、南海实施 3—4.5 个月休渔，被誉为"中国渔业资源保护第一制度"。</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2006</div>
+          <div class="timeline-body">
+            <h3>《中国水生生物资源养护行动纲要》</h3>
+            <p>确立增殖放流、海洋牧场建设、保护区体系三大养护行动，推动渔业从"捕捞依赖"走向"养护增值"。</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2017</div>
+          <div class="timeline-body">
+            <h3>海洋渔业资源总量管理（TAC）试点</h3>
+            <p>以最大持续产量（MSY）为科学基准设定可捕总量，按配额分配捕捞权，浙鲁等地率先试点，推动捕捞管理从"投入控制"迈向"产出控制"。</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2021</div>
+          <div class="timeline-body">
+            <h3>海洋捕捞渔民减船转产持续推进</h3>
+            <p>"十四五"期间压减海洋捕捞强度，发展生态养殖与深远海装备，践行"大食物观"，向江河湖海要食物。</p>
+          </div>
+        </div>
+      </div>
+      <div class="msy-box reveal">
+        <h3>📈 什么是 MSY（最大持续产量）？</h3>
+        <p>在不损害种群自我更新能力的前提下，某一渔业资源可长期持续获得的最大捕捞量。捕捞量低于 MSY，资源得以休养生息；长期高于 MSY，种群将走向衰退。<strong>把捕捞控制在 MSY 之内，就是给未来留鱼。</strong></p>
+      </div>
+    </section>
+
+    <!-- ===================== 6. 互动体验 ===================== -->
+    <section class="section" id="interactive">
+      <div class="section-head reveal">
+        <span class="section-tag">INTERACTIVE · 互动体验</span>
+        <h2>动手体验：与大海对话</h2>
+        <p>左侧与 AI 助手"小渔"聊聊渔业知识，右侧点击剖面图，探索海洋牧场的立体世界。</p>
+      </div>
+      <div class="interact-grid">
+        <!-- AI 问答 -->
+        <div class="chat-card reveal">
+          <div class="chat-head">
+            <span class="chat-avatar">🐠</span>
+            <div>
+              <h3>AI 助手 · 小渔</h3>
+              <p class="chat-status"><span class="status-dot"></span>在线（本地规则引擎演示）</p>
+            </div>
+          </div>
+          <div class="chat-window" id="chatWindow">
+            <div class="msg msg-bot">你好！我是小渔，一个懂海洋渔业的 AI 助手。试试问我：<em>"什么是海洋牧场""什么是 IMTA""伏季休渔是什么"</em>。</div>
+          </div>
+          <div class="chat-chips" id="chatChips"></div>
+          <form class="chat-input" id="chatForm">
+            <input type="text" id="chatText" placeholder="输入你的问题，如：什么是人工鱼礁？" autocomplete="off" maxlength="50">
+            <button type="submit" class="btn btn-primary">发送</button>
+          </form>
+        </div>
+        <!-- 剖面交互图 -->
+        <div class="profile-card reveal">
+          <h3>海洋牧场立体剖面 · 点击探索</h3>
+          <div class="profile-wrap">
+            <svg id="ranchSvg" viewBox="0 0 640 400" role="img" aria-label="海洋牧场垂直剖面示意图">
+              <!-- 天空 -->
+              <rect x="0" y="0" width="640" height="70" fill="#e8f4fb"/>
+              <text x="320" y="30" text-anchor="middle" class="svg-label">海面设施层</text>
+              <!-- 海水 -->
+              <rect x="0" y="70" width="640" height="150" fill="#bfe3f5"/>
+              <rect x="0" y="220" width="640" height="100" fill="#8fcfeb"/>
+              <rect x="0" y="320" width="640" height="60" fill="#6ab8dd"/>
+              <!-- 海底 -->
+              <path d="M0,380 L640,380 L640,400 L0,400 Z" fill="#d8c9a3"/>
+              <!-- 可点击区域 -->
+              <g class="zone" data-zone="surface">
+                <rect x="40" y="10" width="160" height="50" rx="10" class="zone-box"/>
+                <text x="120" y="40" text-anchor="middle" class="zone-text">🛟 浮筏/网箱区</text>
+              </g>
+              <g class="zone" data-zone="upper">
+                <rect x="240" y="90" width="170" height="50" rx="10" class="zone-box"/>
+                <text x="325" y="120" text-anchor="middle" class="zone-text">🌿 藻类养殖层</text>
+              </g>
+              <g class="zone" data-zone="middle">
+                <rect x="440" y="180" width="160" height="50" rx="10" class="zone-box"/>
+                <text x="520" y="210" text-anchor="middle" class="zone-text">🦪 贝类吊养层</text>
+              </g>
+              <g class="zone" data-zone="bottom">
+                <rect x="60" y="330" width="170" height="50" rx="10" class="zone-box"/>
+                <text x="145" y="360" text-anchor="middle" class="zone-text">🪨 人工鱼礁区</text>
+              </g>
+              <g class="zone" data-zone="sensor">
+                <rect x="380" y="300" width="180" height="50" rx="10" class="zone-box"/>
+                <text x="470" y="330" text-anchor="middle" class="zone-text">📡 监测传感器</text>
+              </g>
+              <!-- 装饰鱼群 -->
+              <text x="300" y="200" class="svg-fish">🐟 🐟 🐟</text>
+              <text x="100" y="160" class="svg-fish">🐠</text>
+            </svg>
+            <div class="profile-info" id="profileInfo">
+              <h4>点击图中任一区域</h4>
+              <p>查看该层的养殖品种、生态功能与实时监测参数示例。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 7. 青春使命 ===================== -->
+    <section class="section section-dark" id="mission">
+      <div class="section-head reveal">
+        <span class="section-tag">MISSION · 青春宣言</span>
+        <h2>以青春网力，赴深蓝之约</h2>
+      </div>
+      <div class="mission-body reveal">
+        <p>
+          党的二十大报告提出加快建设<strong>网络强国、数字中国</strong>，树立<strong>大食物观</strong>，向江河湖海要食物。
+          作为海洋渔业科学与技术专业的青年学子，我们既是数字技术的学习者，也是蓝色国土的守护者。
+        </p>
+        <p>
+          从一行代码到一片牧场，从一组数据到一网丰收——我们愿以数智为翼、以专业为舟，
+          把青春写在祖国的万里海疆上，让"深蓝粮仓"在网络强国的浪潮中扬帆远航。
+        </p>
+        <p class="mission-bless">值此母校办学 75 周年之际，谨以此作，献礼潍坊学院，致敬每一位逐梦深蓝的青春奋斗者！</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== 页脚 ===================== -->
+  <footer class="footer">
+    <p class="footer-title">智渔蔚蓝 OceanWise · 智慧海洋牧场数字平台</p>
+    <p>潍坊学院第十五届大学生网络文化节「数智新技艺」单元 · 自主研发应用类参赛作品</p>
+    <p>作者：李泽宇　｜　指导教师：孙海燕</p>
+    <p class="footer-note">本作品代码与文案均为原创；页面数据为示例数据，依据公开统计口径整理，仅作功能演示。</p>
+    <p class="footer-copy">© 2026 智渔蔚蓝 · 献礼潍坊学院办学 75 周年</p>
+  </footer>
+
+  <script>
+/* ===================== 智渔蔚蓝 · 数据文件 =====================
+ * 说明：以下均为示例数据，依据公开统计口径整理，仅用于作品功能演示。
+ * ============================================================ */
+
+// 1. 国家级海洋牧场示范区数量（个）2015-2025
+const RANCH_DATA = {
+  years: ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"],
+  counts: [20, 42, 64, 86, 110, 136, 153, 169, 189, 210, 232]
+};
+
+// 2. 海洋渔业经济总产值（万亿元）2016-2025
+const ECONOMY_DATA = {
+  years: ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"],
+  output: [0.95, 1.02, 1.08, 1.13, 1.10, 1.21, 1.30, 1.38, 1.46, 1.55],
+  growth: [null, 7.4, 5.9, 4.6, -2.7, 10.0, 7.4, 6.2, 5.8, 6.2] // 同比增速 %
+};
+
+// 3. 海水产品养捕结构（万吨）
+const STRUCTURE_DATA = {
+  years: ["2015", "2020", "2025"],
+  aquaculture: [1875, 2135, 2480],   // 海水养殖产量
+  capture: [1435, 1180, 965]         // 海洋捕捞产量
+};
+
+// 4. 增殖放流水生生物苗种数量（亿尾/粒/只）
+const RELEASE_DATA = {
+  years: ["2019", "2020", "2021", "2022", "2023", "2024"],
+  amounts: [302, 315, 340, 368, 390, 415]
+};
+
+/* ===================== AI 助手"小渔"问答语料 ===================== */
+const QA_PAIRS = [
+  {
+    keys: ["海洋牧场", "牧场"],
+    answer: "海洋牧场是基于海洋生态系统原理，在特定海域通过人工鱼礁、增殖放流、底播养殖等措施，修复和优化生态环境、增殖养护渔业资源的可持续渔业生产系统。目前我国海洋牧场分为增殖型、养护型和休闲型三类，国家级海洋牧场示范区已超过200个。"
+  },
+  {
+    keys: ["人工鱼礁", "鱼礁"],
+    answer: "人工鱼礁是人为在海底设置的构造物（混凝土礁、废旧船礁、石块礁等）。它能形成上升流和涡流，聚集浮游生物，为鱼类提供栖息、繁殖、索饵和避敌场所，就像给鱼儿在海底建「房子」，是海洋牧场建设的核心工程措施。"
+  },
+  {
+    keys: ["imta", "多营养层次", "综合养殖"],
+    answer: "IMTA（多营养层次综合养殖）是一种生态养殖模式：上层养海带等大型藻类吸收氮磷，中层吊养扇贝牡蛎等滤食性贝类，下层底播海参鲍鱼利用沉降的有机碎屑。各营养层次生物形成物质循环，既提高单位水体产出，又减少养殖污染，实现「一水多养、生态共赢」。"
+  },
+  {
+    keys: ["伏季休渔", "休渔", "禁渔"],
+    answer: "伏季休渔是我国自1995年起全面实施的渔业资源保护制度。每年春夏鱼类产卵、幼体生长关键期（大致5月至8-9月），渤海、黄海、东海和南海北纬12度以北以北海域禁止除钓具外的捕捞作业，休渔3至4.5个月，被称为「中国渔业资源保护第一制度」。"
+  },
+  {
+    keys: ["增殖放流", "放流"],
+    answer: "增殖放流是将人工繁育的鱼、虾、贝、蟹等苗种投放到自然海域，补充和恢复渔业资源的养护措施。我国每年放流各类水生生物苗种数百亿单位，常见种类有中国对虾、三疣梭子蟹、牙鲆、大黄鱼、海蜇等。"
+  },
+  {
+    keys: ["msy", "最大持续产量"],
+    answer: "MSY（最大持续产量）指在不损害渔业种群自我更新能力的前提下，可长期持续获得的最大捕捞量。它是渔业资源评估的核心参考点：捕捞长期超过MSY会导致资源衰退，控制在MSY以内才能让渔业「年年有鱼」。"
+  },
+  {
+    keys: ["tac", "限额捕捞", "配额"],
+    answer: "TAC（总允许捕捞量）制度是以资源调查评估为依据，为某一渔种设定年度可捕总量，再按配额分配给渔民的管理制度。我国已在山东、浙江等地开展限额捕捞试点，推动管理从「控制渔船数量马力」（投入控制）升级为「控制捕捞产量」（产出控制）。"
+  },
+  {
+    keys: ["声学评估", "鱼探仪", "水声"],
+    answer: "渔业资源声学评估利用科学鱼探仪向水下发射声波，接收鱼群（主要是鱼鳔）的反射回波，通过目标强度与资源量的关系反演鱼类密度和空间分布。它调查速度快、覆盖范围广，是大洋性和近海渔业资源调查的核心手段。"
+  },
+  {
+    keys: ["遥感", "渔情预报", "卫星"],
+    answer: "渔情预报是分析海表温度、叶绿素浓度、海流、海面高度等海洋环境因子与渔场形成的关系，预测中心渔场位置和渔期。如今结合卫星遥感与机器学习模型，可以发布逐日渔场速报，帮助渔船精准找鱼、降低燃油消耗。"
+  },
+  {
+    keys: ["深水网箱", "深远海", "养殖工船", "深蓝粮仓"],
+    answer: "深远海养殖装备包括大型桁架式深水网箱和养殖工船，可将养殖空间从近岸浅海拓展到水深20米以上的深远海。那里水质好、水流交换充分，养出的鱼品质更高；装备还配备自动投饵、水下监控、升降网衣等系统，是「深蓝粮仓」战略的重要支撑。"
+  },
+  {
+    keys: ["溶解氧", "水质", "传感器", "监测"],
+    answer: "智慧渔场通过水下物联网传感器实时监测溶解氧、温度、盐度、pH、叶绿素、浊度等指标。溶解氧是最关键的参数——低于3mg/L时鱼虾会浮头甚至死亡。数据实时回传平台，一旦异常自动预警并联动增氧机，把「凭经验养鱼」变成「看数据养鱼」。"
+  },
+  {
+    keys: ["rov", "水下机器人", "机器人"],
+    answer: "水下机器人（ROV）搭载高清摄像头、声呐和机械手，可代替潜水员完成网箱破损检查、死鱼打捞、鱼群行为观察和生物量估算。它不怕深水、不知疲倦，大幅降低水下作业的安全风险和人力成本。"
+  },
+  {
+    keys: ["碳汇渔业", "碳汇", "蓝碳"],
+    answer: "碳汇渔业是利用贝类、藻类等海洋生物吸收固定二氧化碳的渔业生产方式。贝类通过形成碳酸钙贝壳固碳，藻类通过光合作用吸收碳。发展碳汇渔业既产出优质蛋白，又服务「双碳」目标，是海洋渔业绿色转型的新方向。"
+  },
+  {
+    keys: ["渔业资源评估", "资源评估", "资源量"],
+    answer: "渔业资源评估是运用数学模型（如剩余产量模型、体长结构模型、声学评估法）估算渔业资源量、可捕量和开发状态的科学过程，是制定TAC、休渔政策等管理措施的依据，也是本专业的核心课程之一。"
+  },
+  {
+    keys: ["大食物观"],
+    answer: "大食物观要求树立「大食物观」，向森林、草原、江河湖海、设施农业要食物。海洋是高质量发展战略要地，建设「深蓝粮仓」、保障水产品稳定供给，正是践行大食物观、保障国家粮食安全的重要途径。"
+  },
+  {
+    keys: ["潍坊学院", "75", "校庆", "七十五"],
+    answer: "潍坊学院始建于1951年，2026年迎来办学75周年。本作品以「智汇青春力量·网筑强国基石」为主题，用数智技术讲好海洋渔业故事，向母校75周年华诞献礼！"
+  },
+  {
+    keys: ["专业", "学什么", "课程"],
+    answer: "海洋渔业科学与技术专业主要学习鱼类学、渔业资源评估、渔场学、渔业海洋学、水产养殖学、捕捞学、渔业法规与渔政管理等课程，培养能在海洋渔业生产、科研、管理领域工作的复合型人才。"
+  },
+  {
+    keys: ["你好", "hi", "hello", "在吗"],
+    answer: "你好呀！我是小渔 🐠，一个懂海洋渔业的AI助手。你可以问我海洋牧场、人工鱼礁、IMTA、伏季休渔、增殖放流、MSY、深水网箱等任何渔业知识，也可以点下方的快捷问题～"
+  },
+  {
+    keys: ["谢谢", "感谢"],
+    answer: "不客气！保护海洋、年年有鱼，需要每一个人的努力。如果还有其他问题，随时找我～"
+  }
+];
+
+const QA_FALLBACK = "这个问题超出了小渔目前的知识库范围啦～我是本地规则引擎演示版，可以试试问我：海洋牧场、人工鱼礁、IMTA、伏季休渔、增殖放流、MSY、TAC、声学评估、渔情预报、深水网箱、水质监测、水下机器人、碳汇渔业、大食物观等话题。";
+
+const QA_CHIPS = ["什么是海洋牧场？", "什么是IMTA？", "伏季休渔是什么？", "什么是MSY？", "深水网箱是什么？", "什么是碳汇渔业？"];
+
+/* ===================== 剖面图区域信息 ===================== */
+const PROFILE_INFO = {
+  surface: {
+    title: "🛟 海面设施层 · 浮筏与深水网箱",
+    desc: "海面布设浮筏与抗风浪深水网箱，主养鲈鱼、大黄鱼、金鲳等优质鱼类，配备自动投饵与视频监控系统。",
+    params: ["表层水温 18.6℃", "盐度 30.2", "溶解氧 6.8 mg/L", "流速 0.4 m/s"]
+  },
+  upper: {
+    title: "🌿 上层水体 · 藻类养殖层",
+    desc: "养殖海带、裙带菜、龙须菜等大型藻类，通过光合作用吸收氮磷营养盐、固定二氧化碳，兼具碳汇功能。",
+    params: ["叶绿素 3.2 μg/L", "透明度 4.5 m", "光照 8500 lux"]
+  },
+  middle: {
+    title: "🦪 中层水体 · 贝类吊养层",
+    desc: "吊养扇贝、牡蛎等滤食性贝类，滤食浮游植物与有机颗粒，净化水质，与上层藻类形成生态互补。",
+    params: ["溶解氧 6.2 mg/L", "浊度 8 NTU", "浮游植物密度 中"]
+  },
+  bottom: {
+    title: "🪨 海底 · 人工鱼礁区",
+    desc: "投放混凝土人工鱼礁，为恋礁性鱼类、海参、鲍鱼提供栖息繁殖场所，底播增殖刺参、皱纹盘鲍等海珍品。",
+    params: ["底层水温 15.8℃", "礁体附着生物量 高", "底质 泥沙质"]
+  },
+  sensor: {
+    title: "📡 智慧监测 · 水下物联网节点",
+    desc: "多参数水质传感器与水下摄像头组成监测网络，数据经5G/水声通信实时回传管理平台，异常自动预警。",
+    params: ["数据回传间隔 10 min", "设备在线率 98.5%", "今日预警 0 次"]
+  }
+};
+
+/* ===================== 智渔蔚蓝 · ECharts 图表渲染 ===================== */
+
+(function () {
+  const BLUE = "#1273b3";
+  const LIGHT_BLUE = "#3ea6dd";
+  const ORANGE = "#f2a33c";
+  const GREEN = "#2fa98c";
+
+  const baseAxis = {
+    axisLine: { lineStyle: { color: "#9db9cc" } },
+    axisLabel: { color: "#4d6b82" },
+    splitLine: { lineStyle: { color: "#e6f0f7" } }
+  };
+
+  function fallback(el) {
+    el.innerHTML = '<div class="chart-fallback">图表库加载失败：请联网后刷新页面（ECharts 通过 CDN 引入），其余内容不受影响。</div>';
+  }
+
+  function render(id, option) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (typeof echarts === "undefined") { fallback(el); return; }
+    const chart = echarts.init(el);
+    chart.setOption(option);
+    window.addEventListener("resize", () => chart.resize());
+  }
+
+  // 1. 国家级海洋牧场示范区数量增长（折线 + 面积）
+  render("chartRanch", {
+    tooltip: { trigger: "axis", formatter: "{b}年：{c} 个" },
+    grid: { left: 50, right: 24, top: 36, bottom: 36 },
+    xAxis: { type: "category", data: RANCH_DATA.years, ...baseAxis },
+    yAxis: { type: "value", name: "数量（个）", ...baseAxis },
+    series: [{
+      name: "示范区数量",
+      type: "line",
+      smooth: true,
+      symbol: "circle",
+      symbolSize: 8,
+      data: RANCH_DATA.counts,
+      lineStyle: { width: 3, color: BLUE },
+      itemStyle: { color: BLUE },
+      areaStyle: {
+        color: {
+          type: "linear", x: 0, y: 0, x2: 0, y2: 1,
+          colorStops: [
+            { offset: 0, color: "rgba(18,115,179,0.35)" },
+            { offset: 1, color: "rgba(18,115,179,0.02)" }
+          ]
+        }
+      }
+    }]
+  });
+
+  // 2. 海洋渔业经济总产值（柱状 + 增速折线）
+  render("chartEconomy", {
+    tooltip: { trigger: "axis" },
+    legend: { bottom: 0, textStyle: { color: "#4d6b82" } },
+    grid: { left: 54, right: 54, top: 36, bottom: 58 },
+    xAxis: { type: "category", data: ECONOMY_DATA.years, ...baseAxis },
+    yAxis: [
+      { type: "value", name: "产值（万亿元）", ...baseAxis },
+      { type: "value", name: "增速（%）", ...baseAxis, splitLine: { show: false } }
+    ],
+    series: [
+      {
+        name: "总产值",
+        type: "bar",
+        data: ECONOMY_DATA.output,
+        barWidth: "46%",
+        itemStyle: {
+          borderRadius: [6, 6, 0, 0],
+          color: {
+            type: "linear", x: 0, y: 0, x2: 0, y2: 1,
+            colorStops: [
+              { offset: 0, color: LIGHT_BLUE },
+              { offset: 1, color: BLUE }
+            ]
+          }
+        }
+      },
+      {
+        name: "同比增速",
+        type: "line",
+        yAxisIndex: 1,
+        smooth: true,
+        data: ECONOMY_DATA.growth,
+        lineStyle: { width: 2.5, color: ORANGE },
+        itemStyle: { color: ORANGE }
+      }
+    ]
+  });
+
+  // 3. 养捕结构对比（堆叠柱 + 占比提示）
+  render("chartStructure", {
+    tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
+    legend: { bottom: 0, textStyle: { color: "#4d6b82" } },
+    grid: { left: 56, right: 24, top: 36, bottom: 58 },
+    xAxis: { type: "category", data: STRUCTURE_DATA.years, ...baseAxis },
+    yAxis: { type: "value", name: "产量（万吨）", ...baseAxis },
+    series: [
+      {
+        name: "海水养殖",
+        type: "bar",
+        stack: "total",
+        barWidth: "42%",
+        data: STRUCTURE_DATA.aquaculture,
+        itemStyle: { color: GREEN, borderRadius: [0, 0, 0, 0] },
+        label: { show: true, position: "inside", color: "#fff" }
+      },
+      {
+        name: "海洋捕捞",
+        type: "bar",
+        stack: "total",
+        data: STRUCTURE_DATA.capture,
+        itemStyle: { color: LIGHT_BLUE, borderRadius: [6, 6, 0, 0] },
+        label: { show: true, position: "inside", color: "#fff" }
+      }
+    ]
+  });
+
+  // 4. 增殖放流苗种数量（横向条形）
+  render("chartRelease", {
+    tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: "{b}年：{c} 亿单位" },
+    grid: { left: 56, right: 40, top: 20, bottom: 36 },
+    xAxis: { type: "value", name: "亿单位", ...baseAxis },
+    yAxis: { type: "category", data: RELEASE_DATA.years, ...baseAxis },
+    series: [{
+      name: "放流量",
+      type: "bar",
+      data: RELEASE_DATA.amounts,
+      barWidth: "55%",
+      itemStyle: {
+        borderRadius: [0, 8, 8, 0],
+        color: {
+          type: "linear", x: 0, y: 0, x2: 1, y2: 0,
+          colorStops: [
+            { offset: 0, color: BLUE },
+            { offset: 1, color: ORANGE }
+          ]
+        }
+      },
+      label: { show: true, position: "right", color: "#4d6b82" }
+    }]
+  });
+})();
+
+/* ===================== 智渔蔚蓝 · 交互逻辑 ===================== */
+
+(function () {
+  "use strict";
+
+  /* ---------- 导航：滚动阴影 + 移动端菜单 + 高亮 ---------- */
+  const navbar = document.getElementById("navbar");
+  const navToggle = document.getElementById("navToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  window.addEventListener("scroll", () => {
+    navbar.classList.toggle("scrolled", window.scrollY > 10);
+    highlightNav();
+  });
+
+  navToggle.addEventListener("click", () => navLinks.classList.toggle("open"));
+  navLinks.querySelectorAll("a").forEach(a =>
+    a.addEventListener("click", () => navLinks.classList.remove("open"))
+  );
+
+  const sections = ["data", "ranch", "tech", "sustain", "interactive", "mission"];
+  function highlightNav() {
+    let current = "";
+    for (const id of sections) {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 120) current = id;
+    }
+    navLinks.querySelectorAll(".nav-link").forEach(a => {
+      a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+    });
+  }
+
+  /* ---------- 滚动渐入动画 ---------- */
+  const revealEls = document.querySelectorAll(".reveal");
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ---------- AI 助手"小渔"（本地规则匹配） ---------- */
+  const chatWindow = document.getElementById("chatWindow");
+  const chatForm = document.getElementById("chatForm");
+  const chatText = document.getElementById("chatText");
+  const chatChips = document.getElementById("chatChips");
+
+  function addMsg(text, who) {
+    const div = document.createElement("div");
+    div.className = "msg " + (who === "user" ? "msg-user" : "msg-bot");
+    div.textContent = text;
+    chatWindow.appendChild(div);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }
+
+  function botReply(question) {
+    const q = question.toLowerCase();
+    for (const pair of QA_PAIRS) {
+      if (pair.keys.some(k => q.includes(k.toLowerCase()))) {
+        return pair.answer;
+      }
+    }
+    return QA_FALLBACK;
+  }
+
+  function ask(question) {
+    const text = question.trim();
+    if (!text) return;
+    addMsg(text, "user");
+    // 模拟思考延迟，增强对话感
+    setTimeout(() => addMsg(botReply(text), "bot"), 450);
+  }
+
+  chatForm.addEventListener("submit", e => {
+    e.preventDefault();
+    ask(chatText.value);
+    chatText.value = "";
+    chatText.focus();
+  });
+
+  // 快捷问题 chips
+  QA_CHIPS.forEach(chipText => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "chip";
+    chip.textContent = chipText;
+    chip.addEventListener("click", () => ask(chipText));
+    chatChips.appendChild(chip);
+  });
+
+  /* ---------- 海洋牧场剖面图交互 ---------- */
+  const profileInfo = document.getElementById("profileInfo");
+  const zones = document.querySelectorAll("#ranchSvg .zone");
+
+  zones.forEach(zone => {
+    zone.addEventListener("click", () => {
+      zones.forEach(z => z.classList.remove("selected"));
+      zone.classList.add("selected");
+      const info = PROFILE_INFO[zone.dataset.zone];
+      if (!info) return;
+      profileInfo.innerHTML = "";
+      const h4 = document.createElement("h4");
+      h4.textContent = info.title;
+      const p = document.createElement("p");
+      p.textContent = info.desc;
+      const tags = document.createElement("div");
+      tags.className = "param-tags";
+      info.params.forEach(t => {
+        const span = document.createElement("span");
+        span.textContent = t;
+        tags.appendChild(span);
+      });
+      profileInfo.appendChild(h4);
+      profileInfo.appendChild(p);
+      profileInfo.appendChild(tags);
+    });
+  });
+})();
+
+</script>
+</body>
+</html>
